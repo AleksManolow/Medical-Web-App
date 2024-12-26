@@ -1,0 +1,134 @@
+ /* Reset CSS */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #E8F5E9;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 60px
+}
+
+/* Header and Navbar */
+header {
+    background: #4CAF50;
+    padding: 10px 0;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar .logo {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu .nav-link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.nav-menu .nav-link:hover {
+    color: #C8E6C9;
+}
+
+.nav-auth {
+    list-style: none;
+    display: flex;
+    margin-left: auto;
+}
+
+.nav-auth li {
+    margin-left: 20px;
+}
+
+.nav-auth .nav-link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.nav-auth .nav-link:hover {
+    color: #C8E6C9;
+}
+
+/* Main Section */
+main {
+    flex: 1;
+}
+
+.hero {
+    text-align: center;
+    padding: 20px 20px;
+    color: #2E7D32;
+    margin-top: 18%;
+    margin-bottom: 18%;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.hero .btn {
+    background: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background 0.3s ease;
+}
+
+.hero .btn:hover {
+    background: #2E7D32;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #333;
+    color: #fff;
+    margin-top: auto; 
+}
