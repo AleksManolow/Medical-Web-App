@@ -1,5 +1,4 @@
 <?php
-
 class Db
 {
     private $connection;
