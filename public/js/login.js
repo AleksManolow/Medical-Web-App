@@ -16,7 +16,6 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     loginUser(email, password);
 });
 
-// Функция за логин на потребител
 function loginUser(email, password) {
     const formData = new FormData();
     formData.append('email', email);
@@ -29,10 +28,9 @@ function loginUser(email, password) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Логинът е успешен
-            console.log('Успешен логин:', data.email);
-            console.log('Роля:', data.role);  // Ролята на потребителя
-            alert('Добре дошъл, ' + data.email);
+            if (data.success) {
+                window.location.replace("../pages/index.html");
+            }
 
             // Може да редиректнете или да актуализирате UI тук според ролята
             if (data.role === 'Admin') {
@@ -50,7 +48,6 @@ function loginUser(email, password) {
     });
 }
 
-// Функция за изход на потребител
 function logoutUser() {
     fetch('../../src/api/session.php', {
         method: 'DELETE',
@@ -58,9 +55,9 @@ function logoutUser() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            console.log('Успешен изход');
-            alert('Изходът е успешен.');
-            // Може да обновите UI или да редиректнете
+            if (data.success) {
+                window.location.replace("../pages/login.html");
+            }
         } else {
             console.log('Грешка при изход');
         }
@@ -70,7 +67,6 @@ function logoutUser() {
     });
 }
 
-// Функция за проверка на сесията
 function checkSession() {
     fetch('../../src/api/session.php', {
         method: 'GET',

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../images/Medical-Appointment_Icon.png"></link>
     <link href="../css/style.css" rel="stylesheet"></link>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/login.js" defer></script>
     <title>Medical Appointment Management System</title>
 </head>
 <body>
@@ -21,8 +23,9 @@
                     <li><a href="#" class="nav-link">About</a></li>
                 </ul>
                 <ul class="nav-auth">
-                    <li><a href="login.html" class="nav-link">Login</a></li>
-                    <li><a href="register.html" class="nav-link">Register</a></li>
+                    <li id="login-link"><a href="login.html" class="nav-link">Login</a></li>
+                    <li id="register-link"><a href="register.html" class="nav-link">Register</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="nav-link" onclick="logoutUser()">Logout</a></li>
                 </ul>
             </div>
         </nav>
