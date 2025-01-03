@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/Medical-Appointment_Icon.png"></link>
+    <link href="../css/style.css" rel="stylesheet"></link>
+    <link href="../css/register.css" rel="stylesheet"></link>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/login.js" defer></script>
+    <script src="../js/add_doctor.js" defer></script>
+    <title>Add Doctor</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a class="logo" href="admin_panel.html">
+                    <h1>Medical System</h1>
+                </a>
+                <ul class="nav-menu" >
+                    <li><a href="add_doctor.html" class="nav-link">Add Doctor</a></li>
+                    <li><a href="#" class="nav-link">Doctors</a></li>
+                    <li><a href="#" class="nav-link">Patients</a></li>
+                    <li><a href="#" class="nav-link">Appointments</a></li>
+                </ul>
+                <ul class="nav-auth">
+                    <li id="login-link"><a href="login.html" class="nav-link">Login</a></li>
+                    <li id="register-link"><a href="register.html" class="nav-link">Register</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="nav-link" onclick="logoutUser()">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form id="add-doctor-form" class="reg-form">
+                <h2>Add Doctor</h2>
+                <div class="form-group">
+                    <label class="form-label" for="firstName">First name:</label>
+                    <input class="form-input" type="text" id="firstName" placeholder="First name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="lastName">Last name:</label>
+                    <input class="form-input" type="text" id="lastName" placeholder="Last name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="pin">Personal Identification Number(PIN):</label>
+                    <input class="form-input" type="text" id="pin" placeholder="PIN" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="birthdayDate">Birthday date:</label>
+                    <input class="form-input" type="date" id="birthdayDate" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="specialty">Specialty:</label>
+                    <input class="form-input" type="text" id="specialty" placeholder="Specialty" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone:</label>
+                    <input class="form-input" type="phone" id="phone" placeholder="+359*********" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email:</label>
+                    <input class="form-input" type="email" id="email" placeholder="Email"  required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password:</label>
+                    <input class="form-input" type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileImage">Profile Image:</label>
+                    <input type="file" id="profileImage" accept="image/*">
+                </div>
+                <button type="submit">Register Doctor</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Medical System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
