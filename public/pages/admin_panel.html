@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/Medical-Appointment_Icon.png"></link>
+    <link href="../css/style.css" rel="stylesheet"></link>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/login.js" defer></script>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a class="logo" href="index.html">
+                    <h1>Medical System</h1>
+                </a>
+                <ul class="nav-menu" >
+                    <li><a href="#" class="nav-link">Doctors</a></li>
+                    <li><a href="#" class="nav-link">Patients</a></li>
+                    <li><a href="#" class="nav-link">Appointments</a></li>
+                </ul>
+                <ul class="nav-auth">
+                    <li id="login-link"><a href="login.html" class="nav-link">Login</a></li>
+                    <li id="register-link"><a href="register.html" class="nav-link">Register</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="nav-link" onclick="logoutUser()">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="hero">
+            <h2>Welcome to the Admin Panel</h2>
+            <p>Manage doctors, patients, appointments and other functionalities from here.</p>
+            <a href="login.html" class="btn">Doctors</a>
+            <a href="login.html" class="btn">Patients</a>
+            <a href="login.html" class="btn">Appointments</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Medical System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

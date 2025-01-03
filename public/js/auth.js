@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const publicPages = ["/Medical-Web-App/public/pages/index.html"];
+    const currentPath = window.location.pathname;
+
     fetch('../../src/api/session.php', {
         method: 'GET',
     })
@@ -8,6 +11,10 @@ document.addEventListener("DOMContentLoaded", function() {
             updateNavigation(true);
         } else {
             updateNavigation(false);
+
+            if (!publicPages.includes(currentPath)) {
+                window.location.replace("../pages/login.html");
+            }
         }
     })
     .catch(error => {

@@ -32,13 +32,10 @@ function loginUser(email, password) {
                 window.location.replace("../pages/index.html");
             }
 
-            // Може да редиректнете или да актуализирате UI тук според ролята
             if (data.role === 'Admin') {
-                // Например, ако ролята е "admin", можем да пренасочим към административен панел
-                window.location.href = '/admin_dashboard';  // Тук добавете правилния адрес за администраторския панел
+                window.location.href = '../pages/admin_panel.html';
             }
         } else {
-            // Грешка при логин
             console.log('Грешка при логин:', data.message);
             alert(data.message);
         }
