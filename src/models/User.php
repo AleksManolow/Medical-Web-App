@@ -126,4 +126,75 @@ class User {
             throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
         }
     }
+    
+    public static function findById($id): ?User {
+        try {
+            $db = new DB();
+            $conn = $db->getConnection();
+    
+            $sql = "SELECT * FROM users WHERE Id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($userData) {
+                // Създаване на обект User от извлечените данни
+                $user = new User(
+                    $userData['FirstName'],
+                    $userData['LastName'],
+                    $userData['PIN'],
+                    $userData['BirthdayDate'],
+                    $userData['Email'],
+                    $userData['Password'],
+                    $userData['Role'],
+                    $userData['Image'],
+                    $userData['Specialty'] ?? null,
+                    $userData['Phone'] ?? null
+                );
+    
+                $user->id = $userData['Id'];
+                return $user;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            throw new Exception("Грешка при извличане на потребител: " . $e->getMessage());
+        }
+    }
+    public static function update($id, $firstName, $lastName, $birthdayDate, $specialty, $phone, $email, $profileImage, $pin): void 
+    {
+         try {
+            $db = new DB();
+            $conn = $db->getConnection();
+
+            $sql = "UPDATE users 
+            SET FirstName = :firstName, 
+                LastName = :lastName, 
+                PIN = :pin,
+                BirthdayDate = :birthdayDate, 
+                Specialty = :specialty, 
+                Phone = :phone, 
+                Email = :email, 
+                Image = :profileImage
+            WHERE Id = :id";
+
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':firstName', $firstName);
+            $stmt->bindParam(':lastName', $lastName);
+            $stmt->bindParam(':pin', $pin);
+            $stmt->bindParam(':birthdayDate', $birthdayDate);
+            $stmt->bindParam(':specialty', $specialty);
+            $stmt->bindParam(':phone', $phone);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':profileImage', $profileImage);
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
+        }
+    }
 }

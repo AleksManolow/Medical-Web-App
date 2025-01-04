@@ -20,9 +20,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
             if ($userData && password_verify($password, $userData['Password'])) {
                 $_SESSION['email'] = $email;
                 $_SESSION['role'] = $userData['Role'];
+                $_SESSION['id'] = $userData['Id'];
 
                 echo json_encode([
                     'success' => true,
+                    'id' => $userData['Id'], 
                     'email' => $email,
                     'role' => $userData['Role'],
                 ]);
@@ -52,6 +54,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (isset($_SESSION['email'])) {
             echo json_encode([
                 'success' => true,
+                'id' => $_SESSION['id'],
                 'email' => $_SESSION['email'],
                 'role' => $_SESSION['role'], 
             ]);
