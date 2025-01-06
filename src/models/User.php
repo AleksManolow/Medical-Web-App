@@ -197,4 +197,40 @@ class User {
             throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
         }
     }
+    public static function searchDoctors($search): array
+    {
+        try {
+            $db = new DB();
+            $conn = $db->getConnection();
+        
+            $sql = "SELECT * FROM users WHERE Role = 'Doctor' AND (CONCAT(FirstName, ' ', LastName) LIKE :search OR Specialty LIKE :search)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+            $stmt->execute();
+        
+            $doctorData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $doctors = [];
+        
+            foreach ($doctorData as $doctor) {
+                $user = new User(
+                    $doctor['FirstName'],
+                    $doctor['LastName'],
+                    $doctor['PIN'],
+                    $doctor['BirthdayDate'],
+                    $doctor['Email'],
+                    $doctor['Password'],
+                    $doctor['Role'],
+                    $doctor['Image'],
+                    $doctor['Specialty'] ?? null,
+                    $doctor['Phone'] ?? null
+                );
+                $user->id = $doctor['Id'];
+                $doctors[] = $user;
+            }
+        
+            return $doctors;
+        } catch (PDOException $e) {
+            throw new Exception("Грешка при търсенето на доктори: " . $e->getMessage());
+        }
+    }
 }
