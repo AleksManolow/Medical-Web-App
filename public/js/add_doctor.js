@@ -10,6 +10,7 @@ document.getElementById("add-doctor-form").addEventListener("submit", async func
     formData.append("password", document.getElementById("password").value);
     formData.append("specialty", document.getElementById("specialty").value.trim());
     formData.append("phone", document.getElementById("phone").value.trim());
+    formData.append("description", document.getElementById("description").value.trim());
 
     const fileInput = document.getElementById("profileImage");
     if (fileInput.files.length > 0) {
