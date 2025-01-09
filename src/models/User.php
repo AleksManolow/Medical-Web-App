@@ -14,8 +14,9 @@ class User {
     public $image;
     public $specialty;
     public $phone;
+    public $description;
 
-    public function __construct($first_name,  $last_name,  $pin,  $birthday_date,  $email,  $password,  $role, $image, $specialty, $phone) {
+    public function __construct($first_name,  $last_name,  $pin,  $birthday_date,  $email,  $password,  $role, $image, $specialty, $phone, $description) {
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->pin = $pin;
@@ -26,6 +27,7 @@ class User {
         $this->image = $image;
         $this->specialty = $specialty;
         $this->phone = $phone;
+        $this->description = $description;
 
         //Calc years
         $birthDate = new DateTime($birthday_date);
@@ -74,6 +76,9 @@ class User {
         if($this->role == "Doctor" && empty($this->phone)){
             throw new Exception("Полето телефон е задължително!");
         }
+        if($this->role == "Doctor" && empty($this->description)){
+            throw new Exception("Полето описание е задължително!");
+        }
     }
     public function storeInDB(): void {
         try {
@@ -83,8 +88,8 @@ class User {
 
             if($this->role == "Doctor")
             {
-                $sql = "INSERT INTO users (FirstName, LastName, PIN, BirthdayDate, Email, Password, Role, Image, Years, Specialty, Phone) 
-                VALUES (:first_name, :last_name, :pin, :birthday_date, :email, :password, :role, :image, :years, :specialty, :phone)";
+                $sql = "INSERT INTO users (FirstName, LastName, PIN, BirthdayDate, Email, Password, Role, Image, Years, Specialty, Phone, Description) 
+                VALUES (:first_name, :last_name, :pin, :birthday_date, :email, :password, :role, :image, :years, :specialty, :phone, :description)";
                 $stmt = $conn->prepare($sql);
 
                 $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
@@ -100,6 +105,7 @@ class User {
                 $stmt->bindParam(':years', $this->years);
                 $stmt->bindParam(':specialty', $this->specialty);
                 $stmt->bindParam(':phone', $this->phone);
+                $stmt->bindParam(':description', $this->description);
             }
             else
             {
@@ -151,7 +157,8 @@ class User {
                     $userData['Role'],
                     $userData['Image'],
                     $userData['Specialty'] ?? null,
-                    $userData['Phone'] ?? null
+                    $userData['Phone'] ?? null,
+                    $userData['Description'] ?? null
                 );
     
                 $user->id = $userData['Id'];
@@ -163,9 +170,9 @@ class User {
             throw new Exception("Грешка при извличане на потребител: " . $e->getMessage());
         }
     }
-    public static function update($id, $firstName, $lastName, $birthdayDate, $specialty, $phone, $email, $profileImage, $pin): void 
+    public static function update($id, $firstName, $lastName, $birthdayDate, $specialty, $phone, $email, $profileImage, $pin, $description): void 
     {
-         try {
+        try {
             $db = new DB();
             $conn = $db->getConnection();
 
@@ -177,7 +184,8 @@ class User {
                 Specialty = :specialty, 
                 Phone = :phone, 
                 Email = :email, 
-                Image = :profileImage
+                Image = :profileImage,
+                Description = :description
             WHERE Id = :id";
 
             $stmt = $conn->prepare($sql);
@@ -191,6 +199,7 @@ class User {
             $stmt->bindParam(':phone', $phone);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':profileImage', $profileImage);
+            $stmt->bindParam(':description', $description);
 
             $stmt->execute();
         } catch (PDOException $e) {
@@ -222,7 +231,8 @@ class User {
                     $doctor['Role'],
                     $doctor['Image'],
                     $doctor['Specialty'] ?? null,
-                    $doctor['Phone'] ?? null
+                    $doctor['Phone'] ?? null,
+                    $doctor['Description'] ?? null
                 );
                 $user->id = $doctor['Id'];
                 $doctors[] = $user;

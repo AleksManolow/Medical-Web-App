@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("phone").value = profile.data.phone;
             document.getElementById("email").value = profile.data.email;
             document.getElementById("currentImage").src = `../images/${profile.data.image}`;
+            document.getElementById("description").value = profile.data.description;
         } else {
             alert("Error fetching profile: " + profile.message);
         }
@@ -33,8 +34,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         formData.append("specialty", document.getElementById("specialty").value.trim());
         formData.append("phone", document.getElementById("phone").value.trim());
         formData.append("email", document.getElementById("email").value.trim());
-        formData.append("pin", document.getElementById("pin").value.trim())
-        
+        formData.append("pin", document.getElementById("pin").value.trim());
+        formData.append("description", document.getElementById("description").value.trim());
         const fileInput = document.getElementById("profileImage");
         if (fileInput.files.length > 0) {
             formData.append("profileImage", fileInput.files[0]);

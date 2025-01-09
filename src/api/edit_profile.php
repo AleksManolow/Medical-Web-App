@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'] ?? null;
     $email = $_POST['email'];
     $pin = $_POST['pin'];
+    $description = $_POST['description'];
     
     $profileImage = null;
 
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        User::update($id, $firstName, $lastName, $birthdayDate, $specialty, $phone, $email, $profileImage, $pin);
+        User::update($id, $firstName, $lastName, $birthdayDate, $specialty, $phone, $email, $profileImage, $pin, $description);
         echo json_encode(['success' => true]);
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);

@@ -30,6 +30,7 @@ try {
             'image' => $user->image,
             'specialty' => $user->specialty,
             'phone' => $user->phone,
+            'description' => $user->description
         ],
     ]);
 } catch (Exception $e) {
