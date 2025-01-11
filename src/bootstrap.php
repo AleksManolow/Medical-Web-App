@@ -2,7 +2,7 @@
 spl_autoload_register(function($className) {
 
     $classDirs = [
-        '../models/',
+        __DIR__ . '/models/', 
     ];
 
     foreach ($classDirs as $dir) {
@@ -11,6 +11,5 @@ spl_autoload_register(function($className) {
             return;
         }
     }
-
-    require_once "./models/" . $className . '.php';
+    require_once __DIR__ . '/models/' . $className . '.php';
 });

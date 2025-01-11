@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $specialty = $_POST['specialty'];
     $phone = $_POST['phone'];
+    $description = $_POST['description'];
 
     $imageName = 'default_pic.jpg';
 
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $user = new User($firstName, $lastName, $pin, $birthdayDate, $email, $password, "Doctor", $imageName, $specialty, $phone);
+    $user = new User($firstName, $lastName, $pin, $birthdayDate, $email, $password, "Doctor", $imageName, $specialty, $phone, $description);
 
     try {
         $user->validate();

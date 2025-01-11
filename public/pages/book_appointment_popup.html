@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../css/book_appointment_popup.css" rel="stylesheet">
+</head>
+<body>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <button id="popup-close" class="popup-close">&times;</button>
+            <div class="popup-header">
+                <img id="popup-doctor-image" src="" alt="Doctor Image" class="popup-doctor-image">
+                <div class="popup-doctor-info">
+                    <h2 id="popup-doctor-name"></h2>
+                    <p><strong>Specialty:</strong> <span id="popup-doctor-specialty"></span></p>
+                    <p><strong>Email:</strong> <span id="popup-doctor-email"></span></p>
+                    <p><strong>Phone:</strong> <span id="popup-doctor-phone"></span></p>
+                </div>
+                <div class="popup-doctor-working-time">
+                    <h3 id="popup-doctor-working-time-title">Working time</h3>
+                    <p><strong>Monday-Friday</strong> <span id="popup-doctor-working-time-days"></span></p>
+                    <p><strong>08:00-17:00</strong> <span id="popup-doctor-working-time-hours"></span></p>
+                    <p><strong>Saturday and Sunday</strong> <span id="popup-doctor-working-time-days"></span></p>
+                    <p><strong>Closed</strong> <span id="popup-doctor-working-time-hours"></span></p>
+                </div>
+            </div>
+            <div class="popup-body">
+                <h3>Available Appointments</h3>
+                <label for="appointment-date"><strong>Select Date:</strong></label>
+                <input type="date" id="appointment-date" value="">
+                <ul id="appointments-list"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

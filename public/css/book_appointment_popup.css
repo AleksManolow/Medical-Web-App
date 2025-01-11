@@ -1,0 +1,138 @@
+/* Popup styles */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.popup-close:hover {
+    color: #ff0000;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.popup-doctor-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.popup-doctor-info h2 {
+    font-size: 1.7em;
+    margin: 0;
+    color: #333;
+}
+
+.popup-doctor-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.popup-doctor-working-time{
+    margin-left: 17%;
+    margin-top: 10px;
+    text-align: center;
+    border: #333 2px solid;
+    border-radius: 10%;
+    padding: 3px;
+}
+
+.popup-doctor-working-time h3{
+    text-decoration: underline;
+}
+
+.popup-doctor-working-time p{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+}
+
+.popup-body {
+    margin-top: 20px;
+}
+
+.popup-body h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+#appointments-list {
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    max-height: 160px; 
+    overflow-y: auto; 
+    border: 1px solid #ddd;
+    border-radius: 4px; 
+    background-color: #f9f9f9; 
+}
+
+#appointments-list li {
+    padding: 10px; 
+    border-bottom: 1px solid #eee;
+    font-size: 1em;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#appointments-list li:last-child {
+    border-bottom: none;
+}
+
+#appointments-list li button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+#appointments-list li button:hover {
+    background: #45a049;
+}
+
+#appointments-list li span {
+    color: #999;
+    font-style: italic;
+}
+
+
+

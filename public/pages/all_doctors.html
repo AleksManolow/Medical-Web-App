@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors</title>
     <link rel="icon" href="../images/Medical-Appointment_Icon.png"></link>
     <link href="../css/style.css" rel="stylesheet"></link>
-    <script src="../js/auth.js" defer></script>
-    <script src="../js/login.js" defer></script>
-    <title>Medical Appointment Management System</title>
+    <link href="../css/all_doctors.css" rel="stylesheet"></link>
+    <script src="../js/all_doctors.js" defer></script>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="container">
-                <a class="logo" href="index.html">
+                <a class="logo" href="admin_panel.html">
                     <h1>Medical System</h1>
                 </a>
                 <ul class="nav-menu" >
-                    <li><a href="#" class="nav-link">Home</a></li>
+                    <li><a href="add_doctor.html" class="nav-link">Add Doctor</a></li>
                     <li><a href="all_doctors.html" class="nav-link">Doctors</a></li>
-                    <li><a href="#" class="nav-link">Home</a></li>
-                    <li><a href="#" class="nav-link">About</a></li>
+                    <li><a href="#" class="nav-link">Patients</a></li>
+                    <li><a href="#" class="nav-link">Appointments</a></li>
                 </ul>
                 <ul class="nav-auth">
                     <li id="login-link"><a href="login.html" class="nav-link">Login</a></li>
@@ -31,17 +31,10 @@
             </div>
         </nav>
     </header>
-
     <main>
-        <div class="hero">
-            <h2>Welcome to the Medical Appointment Management System</h2>
-            <p>Book appointments, view medical records, and manage your healthcare with ease.</p>
-            <a href="login.html" class="btn">Get Started</a>
-        </div>
+        <h1 id="title">Doctors</h1>
+        <input type="text" id="search" placeholder="Search by name or specialty">
+        <div id="doctors-list"></div>
     </main>
-
-    <footer>
-        <p>&copy; 2024 Medical System. All rights reserved.</p>
-    </footer>
 </body>
 </html>
