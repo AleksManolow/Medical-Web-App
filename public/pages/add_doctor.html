@@ -6,33 +6,13 @@
     <link rel="icon" href="../images/Medical-Appointment_Icon.png"></link>
     <link href="../css/style.css" rel="stylesheet"></link>
     <link href="../css/register.css" rel="stylesheet"></link>
-    <script src="../js/auth.js" defer></script>
     <script src="../js/login.js" defer></script>
     <script src="../js/add_doctor.js" defer></script>
+    <script src="../js/auth.js" defer></script>
     <title>Add Doctor</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a class="logo" href="admin_panel.html">
-                    <h1>Medical System</h1>
-                </a>
-                <ul class="nav-menu" >
-                    <li><a href="add_doctor.html" class="nav-link">Add Doctor</a></li>
-                    <li><a href="#" class="nav-link">Doctors</a></li>
-                    <li><a href="#" class="nav-link">Patients</a></li>
-                    <li><a href="#" class="nav-link">Appointments</a></li>
-                </ul>
-                <ul class="nav-auth">
-                    <li id="login-link"><a href="login.html" class="nav-link">Login</a></li>
-                    <li id="register-link"><a href="register.html" class="nav-link">Register</a></li>
-                    <li id="profile-link" style="display: none;"><a href="profile.html" class="nav-link">Profile</a></li>
-                    <li id="logout-link" style="display: none;"><a href="#" class="nav-link" onclick="logoutUser()">Logout</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
 
     <main>
         <div class="form-container">
@@ -86,5 +66,7 @@
     <footer>
         <p>&copy; 2024 Medical System. All rights reserved.</p>
     </footer>
+ 
+    <script src="../js/auth_navbar.js" defer></script>
 </body>
 </html>

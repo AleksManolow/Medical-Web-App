@@ -5,32 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../images/Medical-Appointment_Icon.png"></link>
     <link href="../css/style.css" rel="stylesheet"></link>
-    <script src="../js/auth.js" defer></script>
     <script src="../js/login.js" defer></script>
+    <script src="../js/auth.js" defer></script>
     <title>Medical Appointment Management System</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a class="logo" href="index.html">
-                    <h1>Medical System</h1>
-                </a>
-                <ul class="nav-menu" >
-                    <li><a href="#" class="nav-link">Home</a></li>
-                    <li><a href="all_doctors.html" class="nav-link">Doctors</a></li>
-                    <li><a href="#" class="nav-link">Home</a></li>
-                    <li><a href="#" class="nav-link">About</a></li>
-                </ul>
-                <ul class="nav-auth">
-                    <li id="login-link"><a href="login.html" class="nav-link">Login</a></li>
-                    <li id="register-link"><a href="register.html" class="nav-link">Register</a></li>
-                    <li id="profile-link" style="display: none;"><a href="profile.html" class="nav-link">Profile</a></li>
-                    <li id="logout-link" style="display: none;"><a href="#" class="nav-link" onclick="logoutUser()">Logout</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
 
     <main>
         <div class="hero">
@@ -43,5 +23,7 @@
     <footer>
         <p>&copy; 2024 Medical System. All rights reserved.</p>
     </footer>
+    
+    <script src="../js/auth_navbar.js" defer></script>
 </body>
 </html>

@@ -1,5 +1,3 @@
-// login.js - JavaScript код за логин и сесия
-
 // Функция за изпращане на формата и логин на потребителя
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
