@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Fetch available appointments for a specific doctor and date
     async function fetchAvailableAppointments(doctorId, date) {
         try {
-            const response = await fetch(`../../src/api/get_appointments.php?doctor_id=${doctorId}&date=${date}`);
+            const response = await fetch(`../../src/api/get_doctor_appointments.php?doctor_id=${doctorId}&date=${date}`);
             const result = await response.json();
     
             if (result.success) {
