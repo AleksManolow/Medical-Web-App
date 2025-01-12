@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById('popup-doctor-specialty').innerText = doctor.specialty;
             document.getElementById('popup-doctor-email').innerText = doctor.email;
             document.getElementById('popup-doctor-phone').innerText = doctor.phone;
+            document.getElementById('popup-doctor-description').innerText = doctor.description;
 
             // Set the doctorId for date input to fetch appointments later
             const dateInput = document.getElementById('appointment-date');
