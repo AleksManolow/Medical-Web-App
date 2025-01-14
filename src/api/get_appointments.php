@@ -1,15 +1,33 @@
 <?php
 require_once "../bootstrap.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    try {
-        $doctorId = $_GET['doctor_id'];
-        $date = $_GET['date']; 
+header('Content-Type: application/json');
 
-        $response = Appointment::getAvailableSlots($doctorId, $date);
-        echo json_encode($response);
-    } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+session_start();
+
+$id = $_SESSION['id'];
+
+if (!isset($id)) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Не сте логнати.',
+    ]);
+    exit;
+}
+
+$fromDate = isset($_GET['fromDate']) ? $_GET['fromDate'] : null;
+$toDate = isset($_GET['toDate']) ? $_GET['toDate'] : null;
+
+try {
+    $appointments = Appointment::getAppointmentsByDateRangeAndId($fromDate, $toDate, $id, $_SESSION['role']);
+    
+    if ($appointments['success']) {
+        echo json_encode($appointments);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Няма записани часове за този период.']);
     }
+
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => 'Грешка при извличане на данни: ' . $e->getMessage()]);
 }
 ?>

@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if(currentPath == "/Medical-Web-App/public/pages/profile.html" && data.role == "Patient"){
                 document.getElementById('specialty-form').style.display = 'none';
                 document.getElementById('phone-form').style.display = 'none';
+                document.getElementById('description-form').style.display = 'none';
             }
 
             //Ако сме админ логото да ни препращаа към админския панел а не към обикновенния
@@ -72,7 +73,7 @@ function updateNavigationMain(isLoggedIn, role) {
             document.getElementById('add-doctor-link').style.display = 'block';
             document.getElementById('all-doctors-link').style.display = 'block';
             document.getElementById('all-patients-link').style.display = 'block';
-            document.getElementById('appointments-link').style.display = 'none';
+            document.getElementById('appointments-link').style.display = 'block';
         }
         else if(role == 'Patient'){
             document.getElementById('add-doctor-link').style.display = 'none';

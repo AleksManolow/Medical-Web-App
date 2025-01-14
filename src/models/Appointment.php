@@ -80,4 +80,70 @@ class Appointment{
             throw new Exception("Грешка при извличане на наличните часове: " . $e->getMessage());
         }
     }
+    public static function getAppointmentsByDateRangeAndId($fromDate, $toDate, $id, $role) {
+        try {
+            $db = new DB();
+            $conn = $db->getConnection();
+    
+            // Основната SQL заявка
+            $sql = "SELECT a.Id,
+                    a.DateTime AS date_time,
+                    a.Symptoms AS symptoms,
+                    d.FirstName AS doctor_first_name, 
+                    d.LastName AS doctor_last_name, 
+                    d.Image AS doctor_image,
+                    p.FirstName AS patient_first_name, 
+                    p.LastName AS patient_last_name, 
+                    p.Image AS patient_image 
+                    FROM appointments a
+                    JOIN users d ON a.DoctorId = d.Id
+                    JOIN users p ON a.PatientId = p.Id";
+    
+            // Филтриране по дати
+            $conditions = [];
+            if ($fromDate && $toDate) {
+                $conditions[] = "a.DateTime BETWEEN :fromDate AND :toDate";
+            }
+    
+            // Филтриране по ID на пациент или лекар
+            if ($id) {
+                if ($role == 'Patient') {
+                    $conditions[] = "a.PatientId = :patientId";
+                } elseif ($role == 'Doctor') {
+                    $conditions[] = "a.DoctorId = :doctorId";
+                }
+            }
+    
+            // Ако има условия, ги добавяме към заявката
+            if (count($conditions) > 0) {
+                $sql .= " WHERE " . implode(" AND ", $conditions);
+            }
+    
+            $stmt = $conn->prepare($sql);
+    
+            // Свързваме параметрите за дати, ако са подадени
+            if ($fromDate && $toDate) {
+                $stmt->bindParam(':fromDate', $fromDate);
+                $stmt->bindParam(':toDate', $toDate);
+            }
+    
+            // Свързваме ID за пациент или лекар, ако е подаден
+            if ($id) {
+                if ($role == 'Patient') {
+                    $stmt->bindParam(':patientId', $id);
+                } elseif ($role == 'Doctor') {
+                    $stmt->bindParam(':doctorId', $id);
+                }
+            }
+    
+            $stmt->execute();
+    
+            $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return ['success' => true, 'data' => $appointments];
+    
+        } catch (PDOException $e) {
+            throw new Exception("Грешка при извличане на данни: " . $e->getMessage());
+        }
+    }
 }
