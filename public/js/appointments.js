@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                             <p><strong>Symptoms:</strong> ${appointment.symptoms}</p>
                         </div>
                         <div class="button-list">
-                            <button type="button" class="appointment-button">Click Me!</button>
-                            <button type="button" class="appointment-button">Click Me!</button>
+                            <button type="button" class="appointment-button">Add recipe!</button>
+                            <button type="button" class="appointment-button">Add sick leave</button>
                             <button type="button" class="appointment-button">Click Me!</button>
                         </div>
                     </div>

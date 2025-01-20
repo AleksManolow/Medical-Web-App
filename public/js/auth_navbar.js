@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
             //Управление на навигацията
             updateNavigationAuthentication(true);
             updateNavigationMain(true, data.role);
+
             //Ако сме в profile.html и не сме доктори да се премахват полетата за специалалност и телефон
             if(currentPath == "/Medical-Web-App/public/pages/profile.html" && data.role == "Patient"){
                 document.getElementById('specialty-form').style.display = 'none';
@@ -37,8 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 logoLink.setAttribute('href', 'admin_panel.html');
             }
 
-        } else {
             //Управление на навигацията
+            const getStartedButton = document.getElementById("get-start-btn");
+            if (getStartedButton) {
+                getStartedButton.style.display = "none";
+            }
+        } else {
+
             updateNavigationAuthentication(false);
             updateNavigationMain(false, null);
             //Ако не сме логнати и се опитаме да достъпиме страница ще ни прати да се логнем!! 
@@ -92,7 +98,6 @@ function updateNavigationMain(isLoggedIn, role) {
         document.getElementById('add-doctor-link').style.display = 'none';
         document.getElementById('all-doctors-link').style.display = 'none';
         document.getElementById('all-patients-link').style.display = 'none';
-        document.getElementById('all-appointments-link').style.display = 'none';
         document.getElementById('appointments-link').style.display = 'none';
     }
 }
