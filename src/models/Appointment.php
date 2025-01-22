@@ -41,10 +41,9 @@ class Appointment{
             $db = new DB();
             $conn = $db->getConnection();
 
-            // Генериране на всички потенциални часове за деня
-            $startTime = strtotime("$date 09:00");
+            $startTime = strtotime("$date 08:00");
             $endTime = strtotime("$date 17:00");
-            $interval = 30 * 60; // Интервал от 30 минути
+            $interval = 30 * 60; 
             $allSlots = [];
 
             for ($time = $startTime; $time < $endTime; $time += $interval) {
@@ -85,8 +84,7 @@ class Appointment{
             $db = new DB();
             $conn = $db->getConnection();
     
-            // Основната SQL заявка
-            $sql = "SELECT a.Id,
+            $sql = "SELECT a.Id AS id,  
                     a.DateTime AS date_time,
                     a.Symptoms AS symptoms,
                     d.FirstName AS doctor_first_name, 
@@ -99,13 +97,11 @@ class Appointment{
                     JOIN users d ON a.DoctorId = d.Id
                     JOIN users p ON a.PatientId = p.Id";
     
-            // Филтриране по дати
             $conditions = [];
             if ($fromDate && $toDate) {
                 $conditions[] = "a.DateTime BETWEEN :fromDate AND :toDate";
             }
     
-            // Филтриране по ID на пациент или лекар
             if ($id) {
                 if ($role == 'Patient') {
                     $conditions[] = "a.PatientId = :patientId";
@@ -114,20 +110,17 @@ class Appointment{
                 }
             }
     
-            // Ако има условия, ги добавяме към заявката
             if (count($conditions) > 0) {
                 $sql .= " WHERE " . implode(" AND ", $conditions);
             }
     
             $stmt = $conn->prepare($sql);
     
-            // Свързваме параметрите за дати, ако са подадени
             if ($fromDate && $toDate) {
                 $stmt->bindParam(':fromDate', $fromDate);
                 $stmt->bindParam(':toDate', $toDate);
             }
     
-            // Свързваме ID за пациент или лекар, ако е подаден
             if ($id) {
                 if ($role == 'Patient') {
                     $stmt->bindParam(':patientId', $id);

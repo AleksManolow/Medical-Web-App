@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../css/create_recipe_popup.css" rel="stylesheet">
+</head>
+<body>
+    <div id="recipe-popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Create Recipe</h2>
+            <form id="recipe-form">
+                <label for="medication">Medication:</label>
+                <textarea id="medication" name="medication" required></textarea>
+    
+                <label for="dosage">Dosage:</label>
+                <textarea id="dosage" name="dosage" required></textarea>
+    
+                <label for="instructions">Instructions:</label>
+                <textarea id="instructions" name="instructions" required></textarea>
+    
+                <input type="hidden" id="appointment-id" name="appointment_id">
+    
+                <button type="submit">Submit</button>
+                <button type="button" id="close-popup">Cancel</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
