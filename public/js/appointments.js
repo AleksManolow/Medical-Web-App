@@ -3,26 +3,22 @@ document.addEventListener("DOMContentLoaded", async function () {
     const selectToDate = document.getElementById("appointment-to-date");
     const appointmentsList = document.getElementById("appointments-list");
 
-    // Функция за зареждане на попъпа
-    async function loadPopup() {
+    async function loadAddPopup() {
         const response = await fetch('../pages/create_recipe_popup.html');
         const popupHTML = await response.text();
         document.body.insertAdjacentHTML('beforeend', popupHTML);
 
-        // Затваряне на попъпа
         const closePopupButton = document.getElementById("close-popup");
         closePopupButton.addEventListener("click", () => {
             const popup = document.getElementById("recipe-popup");
             popup.classList.add("hidden");
         });
 
-        // Добавяме събитие за изпращане на формата за рецепта
         const recipeForm = document.getElementById("recipe-form");
         recipeForm.addEventListener("submit", async (event) => {
             event.preventDefault();
             const formData = new FormData(recipeForm);
             
-            // Изпращане на данни за рецептата към сървъра
             const response = await fetch("../../src/api/add_recipe.php", {
                 method: "POST",
                 body: formData,
@@ -37,6 +33,18 @@ document.addEventListener("DOMContentLoaded", async function () {
             } else {
                 alert("Error adding recipe: " + result.message);
             }
+        });
+    }
+
+    async function loadViewPopup() {
+        const response = await fetch('../pages/view_recipe_popup.html');
+        const popupHTML = await response.text();
+        document.body.insertAdjacentHTML('beforeend', popupHTML);
+
+        const closeViewPopupButton = document.getElementById("close-view-popup");
+        closeViewPopupButton.addEventListener("click", () => {
+            const popup = document.getElementById("view-recipe-popup");
+            popup.classList.add("hidden");
         });
     }
 
@@ -67,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         </div>
                         <div class="button-list">
                             <button type="button" class="appointment-button add-recipe-button">Add recipe</button>
-                            <button type="button" class="appointment-button">View recipe</button>
+                            <button type="button" class="appointment-button view-recipe-button">View recipe</button>
                             <button type="button" class="appointment-button">Delete recipe</button>
                         </div>
                     </div>
@@ -78,8 +86,33 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    loadPopup()
-    // Извикваме fetchAppointments без дати, за да вземем всички данни по подразбиране
+    appointmentsList.addEventListener("click", async (event) => {
+        if (event.target.classList.contains("view-recipe-button")) {
+            const appointmentId = event.target.closest(".appointment-card").dataset.id;
+
+            const response = await fetch(`../../src/api/get_recipe.php?id=${appointmentId}`);
+            const result = await response.json();
+
+            if (result.success) {
+                document.getElementById("view-patient-name").innerText = `${result.data.patient_first_name} ${result.data.patient_last_name}`;
+                document.getElementById("view-doctor-name").innerText = `${result.data.doctor_first_name} ${result.data.doctor_last_name}`;
+                document.getElementById("view-date").innerText = result.data.date.split(' ')[0];
+                document.getElementById("view-time").innerText = result.data.date.split(' ')[1];
+                document.getElementById("view-symptoms").innerText = result.data.symptoms;
+                document.getElementById("view-medication").innerText = result.data.medication;
+                document.getElementById("view-dosage").innerText = result.data.dosage;
+                document.getElementById("view-instructions").innerText = result.data.instructions;
+
+                const popup = document.getElementById("view-recipe-popup");
+                popup.classList.remove("hidden");
+            } else {
+                alert("Error loading recipe: " + result.message);
+            }
+        }
+    });
+
+    loadAddPopup();
+    loadViewPopup();
     fetchAppointments();
 
     // Добавяме събитие за филтриране на резултати при промяна на датите
