@@ -89,4 +89,24 @@ Class Recipe{
             throw new Exception("Грешка при извличане на данни: " . $e->getMessage());
         }
     }
+    public static function deleteRecipe($appointmentId)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->getConnection();
+    
+            $query = "
+                DELETE FROM recipes
+                WHERE AppointmentId = :appointmentId
+            ";
+    
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':appointmentId', $appointmentId, PDO::PARAM_INT);
+            $stmt->execute(); 
+    
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Грешка при извличане на данни: " . $e->getMessage());
+        }
+    }
 }

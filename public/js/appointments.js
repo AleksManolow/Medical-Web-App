@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         <div class="button-list">
                             <button type="button" class="appointment-button add-recipe-button">Add recipe</button>
                             <button type="button" class="appointment-button view-recipe-button">View recipe</button>
-                            <button type="button" class="appointment-button">Delete recipe</button>
+                            <button type="button" class="appointment-button delete-recipe-button">Delete recipe</button>
                         </div>
                     </div>
                 `;
@@ -127,6 +127,21 @@ document.addEventListener("DOMContentLoaded", async function () {
             const appointmentIdInput = document.getElementById("appointment-id");
             appointmentIdInput.value = appointmentId;
             popup.classList.remove("hidden");
+        }
+    });
+
+    appointmentsList.addEventListener("click", async (event) => {
+        if (event.target.classList.contains("delete-recipe-button")) {
+            const appointmentId = event.target.closest(".appointment-card").dataset.id;
+
+            const response = await fetch(`../../src/api/delete_recipe.php?id=${appointmentId}`);
+            const result = await response.json();
+
+            if (result.success) {
+                alert("Рецептата беше изтрита усшено!");
+            } else {
+                alert("Error loading recipe: " + result.message);
+            }
         }
     });
 });
