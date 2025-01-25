@@ -92,10 +92,12 @@ class Appointment{
                     d.Image AS doctor_image,
                     p.FirstName AS patient_first_name, 
                     p.LastName AS patient_last_name, 
-                    p.Image AS patient_image 
+                    p.Image AS patient_image, 
+                    r.Id As recipe_id
                     FROM appointments a
                     JOIN users d ON a.DoctorId = d.Id
-                    JOIN users p ON a.PatientId = p.Id";
+                    JOIN users p ON a.PatientId = p.Id
+                    LEFt JOIN recipes r ON r.AppointmentId = a.Id";
     
             $conditions = [];
             if ($fromDate && $toDate) {

@@ -12,6 +12,15 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
+if($_SESSION['role'] != 'Doctor')
+{
+    echo json_encode([
+        'success' => false,
+        'message' => 'Не сте доктор.',
+    ]);
+    exit;
+}
+
 $appointmentId = $_GET['id'];
 
 try {

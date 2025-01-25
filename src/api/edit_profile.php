@@ -1,8 +1,26 @@
 <?php
 require_once "../bootstrap.php";
 
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Не сте логнати.',
+    ]);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
+    if($id != $_SESSION['id'])
+    {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Не е възможно друг да променя профила на човек.',
+        ]);
+        exit;
+    }
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $birthdayDate = $_POST['birthdayDate'];

@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $recipe->validate();
-        $recipe->storeInDB();
-        echo json_encode(['success' => true]);
+        $recipeId = $recipe->storeInDB();
+        echo json_encode(['success' => true, 'data'=> $recipeId]);
     } catch (Exception $e) {
         echo json_encode([
             'success' => false,

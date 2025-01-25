@@ -46,7 +46,7 @@
     align-items: center; 
     padding: 20px; 
     margin: 0 auto; 
-    max-width: 800px; 
+    max-width: 60%; 
 }
 
 .appointment-card {
@@ -58,7 +58,6 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 100%;
-    max-width: 800px;
 }
 
 .patient-info, .doctor-info, .date-info, .button-list {
@@ -67,6 +66,24 @@
     align-items: center; 
     gap: 5px;
     text-align: center;
+    width: 20%;
+}
+.button-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 5px;
+    text-align: center;
+    width: 15%;
+}
+
+.date-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 5px;
+    text-align: center;
+    width: 45%;
 }
 
 .appointment-image {
@@ -77,8 +94,7 @@
 }
 
 .appointment-button{
-    background: #4CAF50;
-    color: white;
+    width: 100%;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
@@ -86,8 +102,28 @@
     font-size: 1.1em;
 }
 
-.appointment-button:hover {
+.add-recipe-button{
+    background: #4CAF50;
+    color: white;
+}
+.add-recipe-button:hover {
     background: #45a049;
+}
+
+.view-recipe-button{
+    background: #3e94fc;
+    color: white;
+}
+.view-recipe-button:hover {
+    background: #007dfa;
+}
+
+.delete-recipe-button{
+    background: #f74a15;
+    color: white; 
+}
+.delete-recipe-button:hover {
+    background: #fc0202;
 }
 
 h3 {

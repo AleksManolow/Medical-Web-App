@@ -3,6 +3,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     const selectToDate = document.getElementById("appointment-to-date");
     const appointmentsList = document.getElementById("appointments-list");
 
+    const today = new Date();
+    const lastMonth = new Date(today); 
+    lastMonth.setMonth(today.getMonth() - 1);
+
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); 
+        const day = String(date.getDate()).padStart(2, '0'); 
+        return `${year}-${month}-${day}`;
+    };
+
+    selectFromDate.value = formatDate(lastMonth); 
+    selectToDate.value = formatDate(today); 
+
     async function loadAddPopup() {
         const response = await fetch('../pages/create_recipe_popup.html');
         const popupHTML = await response.text();
@@ -26,7 +40,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             const result = await response.json();
             if (result.success) {
-                alert("Recipe added successfully!");
+                const appointmentCard = document.querySelector(`.appointment-card[data-id="${formData.get('appointment_id')}"]`);
+        
+                const recipeIdInput = appointmentCard.querySelector('input[recipe-id]');
+                recipeIdInput.setAttribute('recipe-id', result.data.recipeId);
+
+                authRecipeButtons();
+
                 const popup = document.getElementById("recipe-popup");
                 popup.classList.add("hidden");
                 recipeForm.reset();
@@ -68,6 +88,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                             <img src="../images/${appointment.doctor_image}" alt="${appointment.doctor_first_name} ${appointment.doctor_last_name}" class="appointment-image">
                             <h3>${appointment.doctor_first_name} ${appointment.doctor_last_name}</h3>
                         </div>
+                        <input type="hidden" recipe-id="${appointment.recipe_id}" value="">
                         <div class="date-info">
                             <p><strong>Date:</strong> ${date}</p>
                             <p><strong>Time:</strong> ${time}</p>
@@ -81,8 +102,51 @@ document.addEventListener("DOMContentLoaded", async function () {
                     </div>
                 `;
             }).join('');
+            
+            authRecipeButtons();
         } else {
             appointmentsList.innerHTML = `<p>Няма намерени записи за този период.</p>`;
+        }
+    }
+
+    async function authRecipeButtons() {
+        try {
+            const response = await fetch('../../src/api/session.php', { method: 'GET' });
+            const data = await response.json();
+    
+            if (data.success) {
+                const role = data.role;
+                const appointmentCards = document.querySelectorAll('.appointment-card');
+    
+                appointmentCards.forEach(card => {
+                    const recipeId = card.querySelector('input[recipe-id]').getAttribute('recipe-id');
+                    const addButton = card.querySelector('.add-recipe-button');
+                    const viewButton = card.querySelector('.view-recipe-button');
+                    const deleteButton = card.querySelector('.delete-recipe-button');
+    
+                    // Първоначално скриваме всички бутони
+                    addButton.style.display = 'none';
+                    viewButton.style.display = 'none';
+                    deleteButton.style.display = 'none';
+    
+                    if (role === "Doctor") {
+                        if (recipeId && recipeId !== "null") {
+                            viewButton.style.display = 'block';
+                            deleteButton.style.display = 'block';
+                        } else {
+                            addButton.style.display = 'block';
+                        }
+                    } else if (role === "Admin" || role === "Patient") {
+                        if (recipeId && recipeId !== "null") {
+                            viewButton.style.display = 'block';
+                        }
+                    }
+                });
+            } else {
+                console.error('Грешка при проверка на сесията: Потребителят не е автентикиран.');
+            }
+        } catch (error) {
+            console.error('Грешка при проверка на сесията:', error);
         }
     }
 
@@ -114,12 +178,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     loadAddPopup();
     loadViewPopup();
     fetchAppointments();
-
-    // Добавяме събитие за филтриране на резултати при промяна на датите
+    authRecipeButtons();
+    
     selectFromDate.addEventListener("change", () => fetchAppointments(selectFromDate.value, selectToDate.value));
     selectToDate.addEventListener("change", () => fetchAppointments(selectFromDate.value, selectToDate.value));
 
-    // Показване на попъпа за добавяне на рецепта
     appointmentsList.addEventListener("click", function (event) {
         if (event.target.classList.contains("add-recipe-button")) {
             const appointmentId = event.target.closest(".appointment-card").dataset.id;
@@ -132,16 +195,26 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     appointmentsList.addEventListener("click", async (event) => {
         if (event.target.classList.contains("delete-recipe-button")) {
-            const appointmentId = event.target.closest(".appointment-card").dataset.id;
+            if(confirm("Сигурни ли сте, че искате да изтриете рецептата?"))
+            {
+                const appointmentId = event.target.closest(".appointment-card").dataset.id;
 
-            const response = await fetch(`../../src/api/delete_recipe.php?id=${appointmentId}`);
-            const result = await response.json();
-
-            if (result.success) {
-                alert("Рецептата беше изтрита усшено!");
-            } else {
-                alert("Error loading recipe: " + result.message);
+                const response = await fetch(`../../src/api/delete_recipe.php?id=${appointmentId}`);
+                const result = await response.json();
+    
+                if (result.success) {
+                    const appointmentCard = document.querySelector(`.appointment-card[data-id="${appointmentId}"]`);
+            
+                    const recipeIdInput = appointmentCard.querySelector('input[recipe-id]');
+                    recipeIdInput.setAttribute('recipe-id', null);
+    
+                    authRecipeButtons();
+    
+                } else {
+                    alert("Error loading recipe: " + result.message);
+                }
             }
+            
         }
     });
 });

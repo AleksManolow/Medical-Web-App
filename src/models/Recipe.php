@@ -17,7 +17,7 @@ Class Recipe{
         $this->instructions = $instructions;
     }
 
-    public function storeInDB(): void {
+    public function storeInDB(): int {
         try {
             $db = new DB();
 			$conn = $db->getConnection();
@@ -32,7 +32,8 @@ Class Recipe{
             $stmt->bindParam(':instructions', $this->instructions);
 
             $stmt->execute();
-    
+            
+            return $conn->lastInsertId();
         } catch (PDOException $e) {
             throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
         }

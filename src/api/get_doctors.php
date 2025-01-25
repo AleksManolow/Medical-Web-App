@@ -1,6 +1,16 @@
 <?php
 require_once "../bootstrap.php";
 
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Не сте логнати.',
+    ]);
+    exit;
+}
+
 $search = $_GET['search'] ?? '';
 
 try {
