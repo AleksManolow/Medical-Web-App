@@ -18,6 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
     .catch(error => {
-        console.error('Грешка при проверка на сесията:', error);
+        console.error('Session verification error:', error);
     });
 });

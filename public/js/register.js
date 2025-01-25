@@ -13,7 +13,7 @@ document.getElementById("register-form").addEventListener("submit", async functi
     };
 
     if (formData.password !== formData.confirmPassword) {
-        alert("Паролите не съвпадат!");
+        alert("The passwords do not match!");
         return;
     }
 
@@ -29,13 +29,13 @@ document.getElementById("register-form").addEventListener("submit", async functi
         const result = await response.json();
 
         if (result.success) {
-            alert("Регистрацията е успешна!");
+            alert("Registration is successful!");
             window.location.replace("../pages/login.html");
         } else {
-            alert("Грешка при регистрация: " + result.message);
+            alert("Registration error:" + result.message);
         }
     } catch (error) {
-        console.error("Грешка при заявката:", error);
-        alert("Възникна грешка при връзката със сървъра.");
+        console.error("Request error:", error);
+        alert("An error occurred while connecting to the server.");
     }
 });

@@ -2,20 +2,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     const searchInput = document.getElementById("search");
     const doctorsList = document.getElementById("doctors-list");
 
-    // Load popup HTML dynamically
     async function loadPopup() {
         const response = await fetch('../pages/book_appointment_popup.html');
         const popupHTML = await response.text();
         document.body.insertAdjacentHTML('beforeend', popupHTML);
 
-        // Close popup when clicking the close button
         const popupCloseButton = document.getElementById('popup-close');
         popupCloseButton.addEventListener('click', () => {
             const popup = document.getElementById('popup');
             popup.style.display = 'none';
         });
 
-        // Add event listener for the date input
         const dateInput = document.getElementById('appointment-date');
         dateInput.addEventListener('change', (event) => {
             const doctorId = dateInput.dataset.doctorId;
@@ -24,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 
-    // Fetch and display doctors list
     async function fetchDoctors(query = '') {
         const response = await fetch(`../../src/api/get_doctors.php?search=${query}`);
         const result = await response.json();
@@ -57,11 +53,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById('popup-doctor-phone').innerText = doctor.phone;
             document.getElementById('popup-doctor-description').innerText = doctor.description;
 
-            // Set the doctorId for date input to fetch appointments later
             const dateInput = document.getElementById('appointment-date');
             dateInput.dataset.doctorId = doctorId;
 
-            // Fetch available appointments for today by default
             const today = new Date().toISOString().split('T')[0];
             dateInput.value = today;
             fetchAvailableAppointments(doctorId, today);
@@ -70,7 +64,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // Fetch available appointments for a specific doctor and date
     async function fetchAvailableAppointments(doctorId, date) {
         try {
             const response = await fetch(`../../src/api/get_doctor_appointments.php?doctor_id=${doctorId}&date=${date}`);
@@ -80,17 +73,14 @@ document.addEventListener("DOMContentLoaded", async function () {
                 const appointmentsList = document.getElementById('appointments-list');
                 const appointments = result.data;
             
-                // Clear the existing list
                 appointmentsList.innerHTML = '';
             
-                // Generate new list items
                 appointments.forEach(app => {
                     const listItem = document.createElement('li');
                     listItem.innerHTML = `
                         <span>${app.time}</span>
                     `;
             
-                    // Check if the appointment is booked or not
                     if (app.status === 'booked') {
                         const bookedSpan = document.createElement('span');
                         bookedSpan.textContent = '(Booked)';
@@ -119,8 +109,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
     
-    
-    // Book appointment logic
     async function bookAppointment(doctorId, date, time) {
         const symptoms = prompt("Enter your symptoms:");
     
@@ -147,14 +135,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // Fetch doctors on page load
     await loadPopup();
     fetchDoctors();
 
-    // Search doctors dynamically
     searchInput.addEventListener("input", () => fetchDoctors(searchInput.value));
 
-    // Show doctor details in popup when clicking on a doctor card
     doctorsList.addEventListener("click", event => {
         const doctorCard = event.target.closest(".doctor-card");
         if (doctorCard) {

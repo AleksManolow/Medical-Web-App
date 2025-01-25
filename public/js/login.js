@@ -1,14 +1,12 @@
-// Функция за изпращане на формата и логин на потребителя
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
-    // Проверка дали има стойности в полетата
     if (!email || !password) {
-        alert('Моля, попълнете всички полета.');
-        return; // Спираме изпращането на формата, ако липсват данни
+        alert('Please fill in all fields.');
+        return;
     }
 
     loginUser(email, password);
@@ -34,12 +32,12 @@ function loginUser(email, password) {
                 window.location.href = '../pages/admin_panel.html';
             }
         } else {
-            console.log('Грешка при логин:', data.message);
+            console.log('Login error:', data.message);
             alert(data.message);
         }
     })
     .catch(error => {
-        console.error('Грешка:', error);
+        console.error('Error:', error);
     });
 }
 
@@ -54,11 +52,11 @@ function logoutUser() {
                 window.location.replace("../pages/login.html");
             }
         } else {
-            console.log('Грешка при изход');
+            console.log('Output error');
         }
     })
     .catch(error => {
-        console.error('Грешка:', error);
+        console.error('Error:', error);
     });
 }
 
@@ -69,14 +67,14 @@ function checkSession() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            console.log('Потребител е логнат:', data.email);
-            console.log('Роля:', data.role);  // Можете да използвате ролята за различни проверки
+            console.log('User is logged in:', data.email);
+            console.log('Role:', data.role);
         } else {
-            console.log('Не сте логнати');
-            alert('Не сте логнати!');
+            console.log('You are not logged in.');
+            alert('You are not logged in!');
         }
     })
     .catch(error => {
-        console.error('Грешка:', error);
+        console.error('Error:', error);
     });
 }

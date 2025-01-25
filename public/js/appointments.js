@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             
             authRecipeButtons();
         } else {
-            appointmentsList.innerHTML = `<p>Няма намерени записи за този период.</p>`;
+            appointmentsList.innerHTML = `<p>No records found for this period.</p>`;
         }
     }
 
@@ -124,7 +124,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const viewButton = card.querySelector('.view-recipe-button');
                     const deleteButton = card.querySelector('.delete-recipe-button');
     
-                    // Първоначално скриваме всички бутони
                     addButton.style.display = 'none';
                     viewButton.style.display = 'none';
                     deleteButton.style.display = 'none';
@@ -143,10 +142,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                     }
                 });
             } else {
-                console.error('Грешка при проверка на сесията: Потребителят не е автентикиран.');
+                console.error('Session validation error: User is not authenticated.');
             }
         } catch (error) {
-            console.error('Грешка при проверка на сесията:', error);
+            console.error('Session verification error:', error);
         }
     }
 
@@ -195,7 +194,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     appointmentsList.addEventListener("click", async (event) => {
         if (event.target.classList.contains("delete-recipe-button")) {
-            if(confirm("Сигурни ли сте, че искате да изтриете рецептата?"))
+            if(confirm("Are you sure you want to delete the recipe?"))
             {
                 const appointmentId = event.target.closest(".appointment-card").dataset.id;
 
