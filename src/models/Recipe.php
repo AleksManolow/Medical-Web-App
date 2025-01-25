@@ -35,18 +35,18 @@ Class Recipe{
             
             return $conn->lastInsertId();
         } catch (PDOException $e) {
-            throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
+            throw new Exception("Database write error:" . $e->getMessage());
         }
     }
     public function validate(): void {
         if(empty($this->medication)) {
-            throw new Exception("Полето лекарства е задължително!");
+            throw new Exception("The medicine field is a must!");
         }
         if(empty($this->dosage)) {
-            throw new Exception("Полето дозировка е задължително!");
+            throw new Exception("The dosage field is required!");
         }
         if(empty($this->instructions)) {
-            throw new Exception("Полето инструкции е задължително!");
+            throw new Exception("The instructions field is required!");
         }
     }
     public static function getRecipeDetailsByAppointmentId($appointmentId)
@@ -87,7 +87,7 @@ Class Recipe{
             
             return $result;
         } catch (PDOException $e) {
-            throw new Exception("Грешка при извличане на данни: " . $e->getMessage());
+            throw new Exception("Data retrieval error: " . $e->getMessage());
         }
     }
     public static function deleteRecipe($appointmentId)
@@ -107,7 +107,7 @@ Class Recipe{
     
             return $stmt->rowCount();
         } catch (PDOException $e) {
-            throw new Exception("Грешка при извличане на данни: " . $e->getMessage());
+            throw new Exception("Data retrieval error:" . $e->getMessage());
         }
     }
 }

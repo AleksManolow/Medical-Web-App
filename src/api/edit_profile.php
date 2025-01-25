@@ -6,7 +6,7 @@ session_start();
 if (!isset($_SESSION['id'])) {
     echo json_encode([
         'success' => false,
-        'message' => 'Не сте логнати.',
+        'message' => 'You are not logged in.',
     ]);
     exit;
 }
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         echo json_encode([
             'success' => false,
-            'message' => 'Не е възможно друг да променя профила на човек.',
+            'message' => 'It is not possible for someone else to change a person profile.',
         ]);
         exit;
     }

@@ -10,7 +10,7 @@ $patient_id = $_SESSION['id'];
 if (!isset($patient_id)) {
     echo json_encode([
         'success' => false,
-        'message' => 'Не сте логнати.',
+        'message' => 'You are not logged in.',
     ]);
     exit;
 }
@@ -19,7 +19,7 @@ if($_SESSION['role'] != 'Patient')
 {
     echo json_encode([
         'success' => false,
-        'message' => 'Не сте пациент.',
+        'message' => 'You are not a patient.',
     ]);
     exit;
 }

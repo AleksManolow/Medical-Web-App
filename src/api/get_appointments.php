@@ -10,7 +10,7 @@ $id = $_SESSION['id'];
 if (!isset($id)) {
     echo json_encode([
         'success' => false,
-        'message' => 'Не сте логнати.',
+        'message' => 'You are not logged in.',
     ]);
     exit;
 }
@@ -24,10 +24,10 @@ try {
     if ($appointments['success']) {
         echo json_encode($appointments);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Няма записани часове за този период.']);
+        echo json_encode(['success' => false, 'message' => 'There are no classes scheduled for this period.']);
     }
 
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Грешка при извличане на данни: ' . $e->getMessage()]);
+    echo json_encode(['success' => false, 'message' => 'Data retrieval error:' . $e->getMessage()]);
 }
 ?>

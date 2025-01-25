@@ -38,51 +38,50 @@ class User {
 
     public function validate(): void {
         if(empty($this->first_name)) {
-            throw new Exception("Полето име е задължително!");
+            throw new Exception("The name field is required!");
         }
         if(empty($this->last_name)) {
-            throw new Exception("Полето фамилия е задължително!");
+            throw new Exception("The last name field is required!");
         }
         if(empty($this->email)) {
-            throw new Exception("Полето имeйл е задължително!");
+            throw new Exception("The email field is required!");
         }
         if(empty($this->password)) {
-            throw new Exception("Полето парола е задължително!");
+            throw new Exception("The password field is required!");
         }
         if(empty($this->pin)){
-            throw new Exception("Полето ЕГН е задължително!");
+            throw new Exception("The Personal Identification Number field is mandatory!");
         }
         if(empty($this->birthday_date)){
-            throw new Exception("Полето дата на раждане е задължително!");
+            throw new Exception("The date of birth field is required!");
         }
         if(strlen($this->first_name) < 2 || strlen($this->first_name) >= 30) {
-            throw new Exception("Моля, попълнете валидно име!");
+            throw new Exception("Please fill in a valid name!");
         }
         if(strlen($this->last_name) < 2 || strlen($this->last_name) >= 30 ) {
-            throw new Exception("Моля, попълнете валиднa фамилия!");
+            throw new Exception("Please fill in a valid last name!");
         }
         if(!(preg_match('/^[^@]+@[^@]+\.[^@]+$/', $this->email))) {
-            throw new Exception("Моля, попълнете валиден имейл.");
+            throw new Exception("Please fill in a valid email.");
         }
         if(strlen($this->password) < 8) {
-            throw new Exception("Моля, попълнете валидна парола, която е поне 8 символа.");
+            throw new Exception("Please fill in a valid password that is at least 8 characters long.");
         }
         if(strlen($this->pin) != 10 || !ctype_digit($this->pin)){
-            throw new Exception("Моля, попълнете валидна ЕГН, която е 10 цифри.");
+            throw new Exception("Please fill in a valid 10-digit personal identification number.");
         }
         if($this->role == "Doctor" && empty($this->specialty)){
-            throw new Exception("Полето специалност е задължително!");
+            throw new Exception("The specialty field is required!");
         }
         if($this->role == "Doctor" && empty($this->phone)){
-            throw new Exception("Полето телефон е задължително!");
+            throw new Exception("The phone field is required!");
         }
         if($this->role == "Doctor" && empty($this->description)){
-            throw new Exception("Полето описание е задължително!");
+            throw new Exception("The description field is required!");
         }
     }
     public function storeInDB(): void {
         try {
-            // Свързване с базата данни
             $db = new DB();
 			$conn = $db->getConnection();
 
@@ -129,7 +128,7 @@ class User {
             $stmt->execute();
     
         } catch (PDOException $e) {
-            throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
+            throw new Exception("Database write error: " . $e->getMessage());
         }
     }
     
@@ -146,7 +145,6 @@ class User {
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
     
             if ($userData) {
-                // Създаване на обект User от извлечените данни
                 $user = new User(
                     $userData['FirstName'],
                     $userData['LastName'],
@@ -167,7 +165,7 @@ class User {
                 return null;
             }
         } catch (PDOException $e) {
-            throw new Exception("Грешка при извличане на потребител: " . $e->getMessage());
+            throw new Exception("Error retrieving user: " . $e->getMessage());
         }
     }
     public static function update($id, $firstName, $lastName, $birthdayDate, $specialty, $phone, $email, $profileImage, $pin, $description): void 
@@ -203,7 +201,7 @@ class User {
 
             $stmt->execute();
         } catch (PDOException $e) {
-            throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
+            throw new Exception("Database write error: " . $e->getMessage());
         }
     }
     public static function searchDoctors($search): array
@@ -240,7 +238,7 @@ class User {
         
             return $doctors;
         } catch (PDOException $e) {
-            throw new Exception("Грешка при търсенето на доктори: " . $e->getMessage());
+            throw new Exception("Error when searching for doctors: " . $e->getMessage());
         }
     }
 }

@@ -7,7 +7,7 @@ session_start();
 if (!isset($_SESSION['id'])) {
     echo json_encode([
         'success' => false,
-        'message' => 'Не сте логнати.',
+        'message' => 'You are not logged in.',
     ]);
     exit;
 }
@@ -16,7 +16,7 @@ if($_SESSION['role'] != 'Doctor')
 {
     echo json_encode([
         'success' => false,
-        'message' => 'Не сте доктор.',
+        'message' => 'You are not a doctor.',
     ]);
     exit;
 }

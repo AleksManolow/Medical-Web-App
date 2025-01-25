@@ -33,7 +33,7 @@ class Appointment{
             $stmt->execute();
     
         } catch (PDOException $e) {
-            throw new Exception("Грешка при запис в базата данни: " . $e->getMessage());
+            throw new Exception("Database write error:" . $e->getMessage());
         }
     }
     public static function getAvailableSlots($doctor_id, $date) {
@@ -50,7 +50,6 @@ class Appointment{
                 $allSlots[] = date("H:i", $time);
             }
 
-            // Взимане на записаните часове от базата
             $sql = "SELECT DATE_FORMAT(DateTime, '%H:%i') as time 
                     FROM appointments 
                     WHERE DoctorId = :doctor_id AND DATE(DateTime) = :date";
@@ -64,7 +63,6 @@ class Appointment{
                 $bookedSlots[] = $row['time'];
             }
 
-            // Обединяване на свободните и заетите часове
             $availableSlots = [];
             foreach ($allSlots as $slot) {
                 $availableSlots[] = [
@@ -76,7 +74,7 @@ class Appointment{
             return ['success' => true, 'data' => $availableSlots];
 
         } catch (PDOException $e) {
-            throw new Exception("Грешка при извличане на наличните часове: " . $e->getMessage());
+            throw new Exception("Error retrieving available hours:" . $e->getMessage());
         }
     }
     public static function getAppointmentsByDateRangeAndId($fromDate, $toDate, $id, $role) {
@@ -138,7 +136,7 @@ class Appointment{
             return ['success' => true, 'data' => $appointments];
     
         } catch (PDOException $e) {
-            throw new Exception("Грешка при извличане на данни: " . $e->getMessage());
+            throw new Exception("Data retrieval error:" . $e->getMessage());
         }
     }
 }

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($doctor_id)) {
         echo json_encode([
             'success' => false,
-            'message' => 'Не сте логнати.',
+            'message' => 'You are not logged in.',
         ]);
         exit;
     }
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         echo json_encode([
             'success' => false,
-            'message' => 'Не сте доктор.',
+            'message' => 'You are not a doctor.',
         ]);
         exit;
     }

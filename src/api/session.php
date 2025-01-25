@@ -29,16 +29,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     'role' => $userData['Role'],
                 ]);
             } else {
-                // Неуспешен логин
                 echo json_encode([
                     'success' => false,
-                    'message' => 'Невалиден имейл или парола.',
+                    'message' => 'Invalid email or password.',
                 ]);
             }
         } else {
             echo json_encode([
                 'success' => false,
-                'message' => 'Имейл и парола са задължителни.',
+                'message' => 'Email and password are required.',
             ]);
         }
         break;
@@ -61,7 +60,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         } else {
             echo json_encode([
                 'success' => false,
-                'message' => 'Не сте логнати.',
+                'message' => 'You are not logged in.',
             ]);
         }
         break;
