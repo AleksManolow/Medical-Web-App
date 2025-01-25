@@ -1,11 +1,10 @@
- /* Reset CSS */
+
  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styling */
 html, body {
     height: 100%;
     margin: 0;
@@ -21,7 +20,6 @@ body {
     padding-top: 60px
 }
 
-/* Header and Navbar */
 header {
     background: #4CAF50;
     padding: 10px 0;
@@ -87,7 +85,6 @@ header {
     color: #C8E6C9;
 }
 
-/* Main Section */
 main {
     flex: 1;
 }
@@ -124,7 +121,6 @@ main {
     background: #2E7D32;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 10px;
