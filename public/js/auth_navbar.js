@@ -78,19 +78,16 @@ function updateNavigationMain(isLoggedIn, role) {
         {
             document.getElementById('add-doctor-link').style.display = 'block';
             document.getElementById('all-doctors-link').style.display = 'block';
-            document.getElementById('all-patients-link').style.display = 'block';
             document.getElementById('appointments-link').style.display = 'block';
         }
         else if(role == 'Patient'){
             document.getElementById('add-doctor-link').style.display = 'none';
             document.getElementById('all-doctors-link').style.display = 'block';
-            document.getElementById('all-patients-link').style.display = 'none';
             document.getElementById('appointments-link').style.display = 'block';
         }
         else if(role == 'Doctor'){
             document.getElementById('add-doctor-link').style.display = 'none';
             document.getElementById('all-doctors-link').style.display = 'none';
-            document.getElementById('all-patients-link').style.display = 'none';
             document.getElementById('appointments-link').style.display = 'block';
         }
         
