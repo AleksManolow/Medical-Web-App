@@ -88,7 +88,8 @@ These users are placed in the DB after an additional script is executed - initDa
 
 ##  :camera: Gallery
 
-
+Unknown User:  Home View
+![Image](https://github.com/user-attachments/assets/5909197b-5270-44d6-9a77-3142256d833c)
 
 
 **This project was developed for the course on web technologies at the FMI.**
