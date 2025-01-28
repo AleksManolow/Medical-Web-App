@@ -88,7 +88,38 @@ These users are placed in the DB after an additional script is executed - initDa
 
 ##  :camera: Gallery
 
+Unknown User:  Home View
+![Image](https://github.com/user-attachments/assets/5909197b-5270-44d6-9a77-3142256d833c)
 
+Patient:  Doctors View
+![Image](https://github.com/user-attachments/assets/98c598e2-6ccf-4953-90b3-c255b7520ffb)
+
+Patient:  Doctor Detail Popup
+![Image](https://github.com/user-attachments/assets/8aa9db31-f004-41a1-b848-c3ba54613845)
+
+Patient: View Recipe Popup
+![Image](https://github.com/user-attachments/assets/81214cb4-662b-4cf2-9701-93a8a39092c2)
+
+Patient: Profile View
+![Image](https://github.com/user-attachments/assets/f6ba1c9d-6a4f-47bb-93c6-b66ed1253b3f)
+
+Patient: Appointments View
+![Image](https://github.com/user-attachments/assets/40405bf5-25ad-4157-b700-29bd6a6be866)
+
+Doctor: Appointments View
+![Image](https://github.com/user-attachments/assets/38f22e6b-a08e-43c5-89e8-08d36f1d3a84)
+
+Doctor: Create Recipe Popup
+![Image](https://github.com/user-attachments/assets/a44fdbc0-bfc7-40e6-8f27-cb3d000fca9a)
+
+Doctor: Profile View
+![Image](https://github.com/user-attachments/assets/da6463d0-2afe-45fc-bbd0-04a549751b53)
+
+Admin: Admin Panel View
+![Image](https://github.com/user-attachments/assets/53ded543-8104-4ff8-a601-42ed0a69e00f)
+
+Admin: Add Doctor View
+![Image](https://github.com/user-attachments/assets/e3256d60-94a5-43f1-aad5-45a7554473ab)
 
 
 **This project was developed for the course on web technologies at the FMI.**
