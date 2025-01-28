@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const publicPages = ["/Medical-Web-App/public/pages/index.html",  
-        "/Medical-Web-App/public/pages/login.html", 
-        "/Medical-Web-App/public/pages/register.html"];
+    const publicPages = ["../pages/index.html",  
+        "../pages/login.html", 
+        "../pages/register.html"].map(page => page.split('/').pop());
 
-    const currentPath = window.location.pathname;
+    const currentPath = window.location.pathname.split('/').pop();
 
     fetch('../../src/api/session.php', {
         method: 'GET',

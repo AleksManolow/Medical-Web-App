@@ -11,8 +11,8 @@ window.onload = function() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    const publicPages = ["/Medical-Web-App/public/pages/index.html"];
-    const currentPath = window.location.pathname;
+    const publicPages = ["../pages/index.html"].map(page => page.split('/').pop());
+    const currentPath = window.location.pathname.split('/').pop();
 
     fetch('../../src/api/session.php', {
         method: 'GET',
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
             updateNavigationAuthentication(true);
             updateNavigationMain(true, data.role);
 
-            if(currentPath == "/Medical-Web-App/public/pages/profile.html" && data.role == "Patient"){
+            if(currentPath == "profile.html" && data.role == "Patient"){
                 document.getElementById('specialty-form').style.display = 'none';
                 document.getElementById('phone-form').style.display = 'none';
                 document.getElementById('description-form').style.display = 'none';
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
             updateNavigationAuthentication(false);
             updateNavigationMain(false, null);
 
-            if (!publicPages.includes(currentPath) && currentPath != "/Medical-Web-App/public/pages/login.html" && currentPath != "/Medical-Web-App/public/pages/register.html") {
+            if (!publicPages.includes(currentPath) && currentPath != "login.html" && currentPath != "register.html") {
                 window.location.replace("../pages/login.html");
             }
         }
